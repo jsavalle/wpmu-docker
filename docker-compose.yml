@@ -21,12 +21,15 @@ services:
      volumes:
        - wpdata:/var/www/html
      restart: always
-     environment:
-       WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: root
-       WORDPRESS_DB_PASSWORD: root
-       WORDPRESS_CONFIG_EXTRA: define('WP_ALLOW_MULTISITE', true );
+     env_files:
+       - wpenv
+        
 volumes:
   dbdata:
   wpdata:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
 
